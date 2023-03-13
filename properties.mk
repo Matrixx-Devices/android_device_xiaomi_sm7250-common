@@ -301,10 +301,6 @@ drm.service.enabled=true
 PRODUCT_VENDOR_PROPERTIES += \
 persist.vendor.qfp=false
 
-# FRP
-PRODUCT_VENDOR_PROPERTIES += \
-ro.frp.pst=/dev/block/bootdevice/by-name/frp
-
 # FS-verity
 ro.apk_verity.mode=2
 
