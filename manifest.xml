@@ -86,14 +86,6 @@
         <fqname>@2.3::ISoundTriggerHw/default</fqname>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.usb.gadget</name>
-        <transport>hwbinder</transport>
-        <interface>
-            <name>IUsbGadget</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>com.qualcomm.qti.dpm.api</name>
         <transport>hwbinder</transport>
         <fqname>@1.0::IdpmQmi/dpmQmiService</fqname>
