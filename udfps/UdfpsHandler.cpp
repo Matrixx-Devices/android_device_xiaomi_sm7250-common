@@ -9,23 +9,26 @@
 #include "UdfpsHandler.h"
 
 #include <android-base/logging.h>
+#include <android-base/unique_fd.h>
 #include <fcntl.h>
 #include <poll.h>
 #include <thread>
 #include <unistd.h>
 
+// Fingerprint hwmodule commands
 #define COMMAND_NIT 10
 #define PARAM_NIT_UDFPS 1
 #define PARAM_NIT_NONE 0
 
-static const char* kFodUiPaths[] = {
-        "/sys/devices/platform/soc/soc:qcom,dsi-display-primary/fod_ui",
-        "/sys/devices/platform/soc/soc:qcom,dsi-display/fod_ui",
-};
+// Touchfeature
+#define TOUCH_DEV_PATH "/dev/xiaomi-touch"
+#define TOUCH_UDFPS_ENABLE 10
+#define TOUCH_MAGIC 0x5400
+#define TOUCH_IOC_SETMODE TOUCH_MAGIC + 0
+#define UDFPS_STATUS_ON 1
+#define UDFPS_STATUS_OFF -1
 
-static const char* kFodStatusPaths[] = {
-        "/sys/touchpanel/fod_status",
-};
+#define FOD_UI_PATH "/sys/devices/platform/soc/soc:qcom,dsi-display-primary/fod_ui"
 
 static bool readBool(int fd) {
     char c;
@@ -46,31 +49,17 @@ static bool readBool(int fd) {
     return c != '0';
 }
 
-class XiaomiLitoUdfpsHandler : public UdfpsHandler {
+class XiaomiUdfpsHander : public UdfpsHandler {
   public:
-    void init(fingerprint_device_t *device) {
+    void init(fingerprint_device_t* device) {
         mDevice = device;
+        touch_fd_ = android::base::unique_fd(open(TOUCH_DEV_PATH, O_RDWR));
 
         std::thread([this]() {
-            int fd;
-            for (auto& path : kFodUiPaths) {
-                fd = open(path, O_RDONLY);
-                if (fd >= 0) {
-                    break;
-                }
-            }
-
+            int fd = open(FOD_UI_PATH, O_RDONLY);
             if (fd < 0) {
                 LOG(ERROR) << "failed to open fd, err: " << fd;
                 return;
-            }
-
-            int fodStatusFd;
-            for (auto& path : kFodStatusPaths) {
-                fodStatusFd = open(path, O_RDWR);
-                if (fodStatusFd >= 0) {
-                    break;
-                }
             }
 
             struct pollfd fodUiPoll = {
@@ -120,11 +109,12 @@ class XiaomiLitoUdfpsHandler : public UdfpsHandler {
     }
 
   private:
-    fingerprint_device_t *mDevice;
+    fingerprint_device_t* mDevice;
+    android::base::unique_fd touch_fd_;
 };
 
 static UdfpsHandler* create() {
-    return new XiaomiLitoUdfpsHandler();
+    return new XiaomiUdfpsHander();
 }
 
 static void destroy(UdfpsHandler* handler) {
@@ -132,6 +122,6 @@ static void destroy(UdfpsHandler* handler) {
 }
 
 extern "C" UdfpsHandlerFactory UDFPS_HANDLER_FACTORY = {
-    .create = create,
-    .destroy = destroy,
+        .create = create,
+        .destroy = destroy,
 };
