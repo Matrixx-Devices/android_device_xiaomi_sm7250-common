@@ -179,6 +179,12 @@ PRODUCT_VENDOR_PROPERTIES += \
 
 # Disable Log spams
 PRODUCT_VENDOR_PROPERTIES += \
+log.tag.CHIUSECASE=ERROR \
+persist.camera.mct.debug=0 \
+persist.camera.iface.logs=0 \
+persist.camera.imglib.logs=0 \
+persist.camera.isp.debug=0 \
+persist.camera.sensor.debug=0 \
 persist.log.tag.AnalyticsService=S \
 persist.log.tag.KernelCpuUidActiveTimeReader=S \
 persist.log.tag.Tracer=S \
@@ -190,7 +196,15 @@ persist.log.tag.wificond=S \
 persist.log.tag.b/223498680=S \
 persist.log.tag.TrafficStats=S \
 persist.log.tag.ContrastColorUtil=S \
-persist.log.tag.OpenGLRenderer=S
+persist.log.tag.OpenGLRenderer=S \
+persist.vendor.camera.logInfoMask=false \
+persist.vendor.ims.disableADBLogs=1 \
+persist.vendor.ims.disableIMSLogs=1 \
+persist.vendor.ims.disableDebugDataPathLogs=1 \
+persist.vendor.ims.disableDebugLogs=1 \
+persist.vendor.ims.disableSigHandler=1 \
+persist.vendor.ims.disableQXDMLogs=1
+
 
 # Display
 PRODUCT_VENDOR_PROPERTIES += \
