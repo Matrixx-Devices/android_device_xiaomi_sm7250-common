@@ -282,20 +282,37 @@ PRODUCT_PACKAGES += \
 
 # Logging
 SPAMMY_E_LOG_TAGS := \
+    ApexManager \
+    ApexManagerTiming \
     CoreBackPreview \
+    CompatConfig \
+    GameManagerService \
+    HotseatPredictionController \
     JobScheduler \
+    LineageSystemServer \
     MiStcImpl \
     NearbyConnections \
+    PackageManager \
+    PackageParsing \
+    PackageSettings \
     RecyclerView \
     SDM \
     SDM-histogram \
     ShellRecents \
     SRE \
+    StorageManagerService \
+    SystemConfig \
+    SystemServerTiming \
+    SystemServerTimingAsync \
+    SystemServiceManager \
     Telecom \
     UserManagerService \
+    UserSystemPackageInstaller \
     WifiHAL \
     WindowManager \
     WindowManagerShell \
+    android.hardware.wifi-service \
+    android.vending \
     cnss-daemon \
     libcitsensorservice@1.1-impl \
     libsensor-displayalgo \
@@ -304,7 +321,8 @@ SPAMMY_E_LOG_TAGS := \
     sensors \
     vendor.qti.hardware.display.composer-service \
     vendor.qti.vibrator \
-    vendor.xiaomi.sensor.citsensorservice@1.1-service
+    vendor.xiaomi.sensor.citsensorservice@1.1-service \
+    ziparchive
 
 SPAMMY_S_LOG_TAGS := \
     AnalyticsService \
