@@ -120,6 +120,7 @@
         "3 => 275000000",
         "4 => 150000000"
       ],
+      "DefaultIndex": 4,
       "ResetOnInit": true
     },
     {
