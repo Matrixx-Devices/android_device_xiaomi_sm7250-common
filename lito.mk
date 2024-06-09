@@ -551,6 +551,7 @@ PRODUCT_COPY_FILES += \
 
 # Shim
 PRODUCT_PACKAGES += \
+    libpiex_shim \
     libwatermark_shim
 
 # Soong namespaces
