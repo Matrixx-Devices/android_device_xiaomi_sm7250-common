@@ -226,10 +226,14 @@ PRODUCT_PACKAGES += \
 
 ifeq ($(TARGET_HAS_UDFPS),true)
 PRODUCT_PACKAGES += \
-    libudfpshandler
+    libudfpshandler \
+    sensors.udfps
 
 PRODUCT_PACKAGES += \
     vendor.goodix.hardware.biometrics.fingerprint@2.1.vendor
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
 endif
 
 # FM
@@ -543,11 +547,7 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-service \
     android.hardware.sensors@2.0 \
     android.hardware.sensors@2.1 \
-    libsensorndkbridge \
-    sensors.udfps
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
+    libsensorndkbridge
 
 # Shim
 PRODUCT_PACKAGES += \
