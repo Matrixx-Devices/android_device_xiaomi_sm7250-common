@@ -69,7 +69,7 @@
     },
     {
       "Name": "CPUBigClusterGovernor",
-      "Path": "/sys/devices/system/cpu/cpufreq/policy4/scaling_governor",
+      "Path": "/sys/devices/system/cpu/cpufreq/policy6/scaling_governor",
       "Values": [
         "schedutil",
         "powersave"
